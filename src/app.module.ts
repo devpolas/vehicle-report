@@ -3,9 +3,19 @@ import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { UsersModule } from './users/users.module.js';
 import { ReportsModule } from './reports/reports.module.js';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [UsersModule, ReportsModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'better-sqlite3',
+      database: 'db.sqlite',
+      entities: [],
+      synchronize: true,
+    }),
+    UsersModule,
+    ReportsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

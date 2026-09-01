@@ -7,13 +7,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity.js';
 import { Report } from './reports/report.entity.js';
 import { AuthModule } from './auth/auth.module.js';
+import { Auth } from './auth/auth.entity.js';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
       database: 'db.sqlite',
-      entities: [User, Report],
+      entities: [Auth, User, Report],
       synchronize: true,
     }),
     UsersModule,

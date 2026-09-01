@@ -23,7 +23,4 @@ export class User {
 
   @Column({ type: 'text', nullable: true })
   bio?: string;
-
-  @OneToOne(() => Auth, (auth) => auth.user)
-  auth: Auth;
 }

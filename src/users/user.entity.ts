@@ -1,4 +1,5 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
 import { Auth } from '../auth/auth.entity.js';
 
 @Entity()
@@ -8,6 +9,9 @@ export class User {
 
   @Column()
   name: string;
+
+  @Column({ unique: true })
+  email: string;
 
   @Column({ nullable: true })
   gender?: string;
@@ -23,4 +27,7 @@ export class User {
 
   @Column({ type: 'text', nullable: true })
   bio?: string;
+
+  @OneToMany(() => Auth, (auth) => auth.user)
+  auths: Auth[];
 }

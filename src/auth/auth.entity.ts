@@ -1,24 +1,36 @@
 import {
   Column,
   Entity,
-  JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
+
 import { User } from '../users/user.entity.js';
 
 @Entity()
+@Unique('providerId_accountId', ['providerId', 'accountId'])
 export class Auth {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
-  email: string;
+  @Column({ nullable: true })
+  password?: string;
 
   @Column()
-  password: string;
+  providerId: string;
 
-  @OneToOne(() => User)
-  @JoinColumn()
+  @Column()
+  accountId: string;
+
+  @Column({ nullable: true })
+  accessToken?: string;
+
+  @Column({ nullable: true })
+  refreshToken?: string;
+
+  @ManyToOne(() => User, (user) => user.auths, {
+    onDelete: 'CASCADE',
+  })
   user: User;
 }

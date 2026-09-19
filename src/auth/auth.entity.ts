@@ -6,6 +6,8 @@ import {
   Unique,
 } from 'typeorm';
 
+import type { Relation } from 'typeorm';
+
 import { User } from '../users/user.entity.js';
 
 @Entity()
@@ -32,5 +34,5 @@ export class Auth {
   @ManyToOne(() => User, (user) => user.auths, {
     onDelete: 'CASCADE',
   })
-  user: User;
+  user: Relation<User>;
 }

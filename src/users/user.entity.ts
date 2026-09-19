@@ -1,5 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+import type { Relation } from 'typeorm';
+
 import { Auth } from '../auth/auth.entity.js';
 
 @Entity()
@@ -29,5 +31,5 @@ export class User {
   bio?: string;
 
   @OneToMany(() => Auth, (auth) => auth.user)
-  auths: Auth[];
+  auths: Relation<Auth[]>;
 }
